@@ -27,9 +27,3 @@
     "gh-pages": "^5.0.0"
   }
 }
-
-"homepage": "https://datascintist-abusufian.github.io/biohybrid-heart-valve",
-"scripts": {
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist"
-}
