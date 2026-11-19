@@ -191,7 +191,8 @@ export const ValveFace: React.FC<{
     const ry = leaflets === 3 ? r * shape : r * 0.55;
     pts.push(`${(60 + rx * Math.cos(th)).toFixed(2)},${(60 + ry * Math.sin(th)).toFixed(2)}`);
   }
-  const tissue = `hsl(${Math.round(350 - damage * 310)}, ${Math.round(55 - damage * 25)}%, ${Math.round(78 - damage * 18)}%)`;
+  // healthy leaflet tissue is pink; calcified tissue shifts towards tan
+  const tissue = `hsl(${Math.round((350 + damage * 55) % 360)}, ${Math.round(55 - damage * 20)}%, ${Math.round(78 - damage * 8)}%)`;
   return (
     <figure className="flex flex-col items-center">
       <svg viewBox="0 0 120 120" className="w-28 h-28">
