@@ -35,6 +35,7 @@ import {
 } from "./twin/lifetime";
 import { FIT_PARAMS, FitResult, FollowUp, Measurements, PrognosisResult, calibrate, fitPrognosis } from "./twin/fit";
 import { Plot, ValveFace } from "./twin/charts";
+import { CASES, Outcome, Plan, Position, SEGMENTS, Segment, applyPlan, criteria, evaluate, planSearch, vWave } from "./twin/repair";
 
 // ---------------------------------------------------------------- helpers
 const f = (v: number, d = 0) => (Number.isFinite(v) ? v.toFixed(d) : "–");
@@ -923,6 +924,415 @@ const PersonaliseTab: React.FC<{
   );
 };
 
+// ---------------------------------------------------------------- repair tab
+const RepairTab: React.FC<{ params: TwinParams; setParams: (p: TwinParams) => void; bsa: number; goLive: () => void }> = ({
+  params,
+  setParams,
+  bsa,
+  goLive,
+}) => {
+  const [caseId, setCaseId] = useState("svd-as");
+  const c = CASES.find((x) => x.id === caseId) ?? CASES[0];
+  const pre = useMemo(() => c.apply(params), [c, params]);
+  const position: Position =
+    c.id === "current" ? (pre.mitral.roa > 0.05 && pre.aortic.eoaMax >= 1.2 && pre.aortic.roa < 0.1 ? "mitral" : "aortic") : c.position;
+  const preSim = useMemo(() => simulate(pre), [pre]);
+
+  const [proc, setProc] = useState<"viv" | "savr" | "biohybrid">("viv");
+  const [thv, setThv] = useState<"BEV" | "SEV">("BEV");
+  const [bvf, setBvf] = useState(false);
+  const [trueID, setTrueID] = useState(21);
+  const [savrLabel, setSavrLabel] = useState(23);
+  const [decalc, setDecalc] = useState(0.7);
+  const [seal, setSeal] = useState(0.8);
+  const [eoaOriginal, setEoaOriginal] = useState(1.8);
+  const [width, setWidth] = useState<"NTR" | "XTR">("NTR");
+  const [clips, setClips] = useState<Segment[]>([1]);
+  const [ranked, setRanked] = useState<Outcome[] | null>(null);
+  const [progress, setProgress] = useState<string>("");
+
+  useEffect(() => setRanked(null), [caseId, params]);
+
+  const plan: Plan =
+    position === "mitral"
+      ? { kind: "teer", clips, width }
+      : proc === "viv"
+      ? { kind: "viv", thv, bvf, trueID }
+      : proc === "savr"
+      ? { kind: "savr", label: savrLabel }
+      : { kind: "biohybrid", decalc, seal, eoaOriginal };
+
+  const out = useMemo(() => evaluate(pre, preSim, plan, c, position, preSim.state), [pre, preSim, JSON.stringify(plan), c, position]);
+  const ph = preSim.haemo;
+  const qh = out.sim.haemo;
+  const preCrit = criteria(position, ph, ph, vWave(preSim), vWave(preSim));
+
+  const usePlan = (pl: Plan) => {
+    if (pl.kind === "teer") {
+      setClips(pl.clips);
+      setWidth(pl.width);
+    } else if (pl.kind === "viv") {
+      setProc("viv");
+      setThv(pl.thv);
+      setBvf(pl.bvf);
+    } else if (pl.kind === "savr") {
+      setProc("savr");
+      setSavrLabel(pl.label);
+    } else {
+      setProc("biohybrid");
+      setDecalc(pl.decalc);
+      setSeal(pl.seal);
+    }
+  };
+
+  const search = async () => {
+    setRanked(null);
+    const r = await planSearch(pre, preSim, c, position, { trueID, includeHypothetical: true, eoaOriginal }, (d, t) =>
+      setProgress(`${d}/${t} plans simulated`)
+    );
+    setRanked(r);
+  };
+
+  const tPre = useMemo(() => Array.from(preSim.trace.t, (t) => t * 1000), [preSim]);
+  const tPost = useMemo(() => Array.from(out.sim.trace.t, (t) => t * 1000), [out]);
+  const pSeries = useMemo(
+    () => [
+      { x: tPre, y: preSim.trace.pLV, color: "#e11d48", label: "LV before", dash: "5 4", width: 1.5 },
+      { x: tPost, y: out.sim.trace.pLV, color: "#e11d48", label: "LV after" },
+      { x: tPre, y: preSim.trace.pAo, color: "#2563eb", label: "Aorta before", dash: "5 4", width: 1.5 },
+      { x: tPost, y: out.sim.trace.pAo, color: "#2563eb", label: "Aorta after" },
+      { x: tPre, y: preSim.trace.pLA, color: "#16a34a", label: "LA before", dash: "5 4", width: 1.5 },
+      { x: tPost, y: out.sim.trace.pLA, color: "#16a34a", label: "LA after" },
+    ],
+    [preSim, out, tPre, tPost]
+  );
+  const pvSeries = useMemo(
+    () => [
+      { x: preSim.trace.vLV, y: preSim.trace.pLV, color: "#94a3b8", label: "Before repair", dash: "5 4" },
+      { x: out.sim.trace.vLV, y: out.sim.trace.pLV, color: "#e11d48", label: "After repair" },
+    ],
+    [preSim, out]
+  );
+
+  const rows: [string, (h: Haemodynamics) => number, number, string, boolean][] = [
+    ["Cardiac output", (h) => h.co, 2, "L/min", true],
+    ["Forward stroke volume", (h) => h.forwardSV, 0, "mL", true],
+    ["Blood pressure (systolic)", (h) => h.sbp, 0, "mmHg", true],
+    ["Blood pressure (diastolic)", (h) => h.dbp, 0, "mmHg", true],
+    ["LVEF", (h) => h.ef, 0, "%", true],
+    ["LV end-diastolic volume", (h) => h.edv, 0, "mL", false],
+    ["Mean LA pressure", (h) => h.lapMean, 1, "mmHg", false],
+    ["Aortic mean gradient", (h) => h.avMeanGradient, 1, "mmHg", false],
+    ["Aortic peak velocity", (h) => h.avVmax, 2, "m/s", false],
+    ["Aortic EOA (Gorlin)", (h) => h.avGorlinEOA, 2, "cm²", true],
+    ["Aortic regurgitant fraction", (h) => h.arRF, 0, "%", false],
+    ["Mitral regurgitant fraction", (h) => h.mrRF, 0, "%", false],
+    ["Mitral mean gradient", (h) => h.mvMeanGradient, 1, "mmHg", false],
+    ["LV stroke work", (h) => h.strokeWork / 1000, 1, "k mmHg·mL", true],
+  ];
+
+  const allPass = out.crit.every((x) => x.pass);
+  const segBtn = "rounded-lg border px-2 py-1 text-xs";
+
+  return (
+    <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
+      <aside className="xl:col-span-4 space-y-6">
+        <Card title="1 · Patient">
+          <select
+            value={caseId}
+            onChange={(e) => setCaseId(e.target.value)}
+            className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-2 py-2 text-sm"
+          >
+            {CASES.map((x) => (
+              <option key={x.id} value={x.id}>
+                {x.name}
+              </option>
+            ))}
+          </select>
+          <p className="text-xs text-slate-500 mt-2">
+            {c.desc}. Built on the current twin{params !== DEFAULT_PARAMS ? " (your custom / calibrated heart)" : ""}. Treated valve:{" "}
+            <b>{position === "aortic" ? "biohybrid aortic prosthesis" : "mitral valve"}</b>.
+          </p>
+          <div className="flex flex-wrap gap-2 mt-3">
+            {preCrit.filter((x) => !x.label.includes("rises")).map((x) => (
+              <Badge key={x.label} grade={x.pass ? "normal" : "abnormal"}>
+                {x.label.replace(/ \(optimal\)/, "")}: {x.value}
+              </Badge>
+            ))}
+          </div>
+        </Card>
+
+        <Card title="2 · Procedure">
+          {position === "aortic" ? (
+            <div className="space-y-3">
+              <div className="grid grid-cols-3 gap-1">
+                {([
+                  ["viv", "Valve-in-valve TAVR"],
+                  ["savr", "Redo surgical AVR"],
+                  ["biohybrid", "Biohybrid in-situ repair*"],
+                ] as const).map(([id, l]) => (
+                  <button
+                    key={id}
+                    onClick={() => setProc(id)}
+                    className={`rounded-lg border px-2 py-2 text-xs font-medium ${
+                      proc === id ? "border-rose-500 bg-rose-50 dark:bg-rose-950/40" : "border-slate-200 dark:border-slate-800"
+                    }`}
+                  >
+                    {l}
+                  </button>
+                ))}
+              </div>
+              {proc === "viv" && (
+                <>
+                  <Slider label="Surgical valve true internal diameter" value={trueID} min={17} max={27} step={1} unit="mm" digits={0} onChange={setTrueID} />
+                  <label className="block text-sm">
+                    Transcatheter valve
+                    <select
+                      value={thv}
+                      onChange={(e) => setThv(e.target.value as "BEV" | "SEV")}
+                      className="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-2 py-1.5"
+                    >
+                      <option value="BEV">Balloon-expandable (intra-annular)</option>
+                      <option value="SEV">Self-expanding (supra-annular)</option>
+                    </select>
+                  </label>
+                  <label className="flex items-center gap-2 text-sm">
+                    <input type="checkbox" checked={bvf} onChange={(e) => setBvf(e.target.checked)} className="accent-rose-600" />
+                    Bioprosthetic valve fracture (high-pressure balloon)
+                  </label>
+                </>
+              )}
+              {proc === "savr" && (
+                <label className="block text-sm">
+                  New bioprosthesis label size
+                  <select
+                    value={savrLabel}
+                    onChange={(e) => setSavrLabel(parseInt(e.target.value))}
+                    className="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-2 py-1.5"
+                  >
+                    {[19, 21, 23, 25, 27].map((s) => (
+                      <option key={s} value={s}>
+                        {s} mm (reference EOA ≈ {(0.11 * s - 1).toFixed(2)} cm²)
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )}
+              {proc === "biohybrid" && (
+                <>
+                  <Slider label="Decalcification efficacy" value={decalc} min={0} max={1} step={0.05} onChange={setDecalc} hint="Share of lost orifice area recovered" />
+                  <Slider label="Tear-sealing efficacy" value={seal} min={0} max={1} step={0.05} onChange={setSeal} hint="Share of regurgitant orifice closed" />
+                  <Slider label="Original implanted EOA" value={eoaOriginal} min={1} max={2.5} step={0.05} unit="cm²" onChange={setEoaOriginal} />
+                  <p className="text-xs text-amber-700 dark:text-amber-400">
+                    * Hypothetical: no implanted self-repairing or nanorobotic valve repair exists yet. Efficacies are your assumptions.
+                  </p>
+                </>
+              )}
+            </div>
+          ) : (
+            <div className="space-y-3">
+              <p className="text-sm text-slate-600 dark:text-slate-300">Transcatheter edge-to-edge repair (TEER). Choose where each clip grasps the leaflets.</p>
+              <label className="block text-sm">
+                Clip width
+                <select
+                  value={width}
+                  onChange={(e) => setWidth(e.target.value as "NTR" | "XTR")}
+                  className="mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-2 py-1.5"
+                >
+                  <option value="NTR">Standard (NT/NTR-type)</option>
+                  <option value="XTR">Wide (XT/XTR-type)</option>
+                </select>
+              </label>
+              {clips.map((s, i) => (
+                <div key={i} className="flex items-center gap-2 text-sm">
+                  <span className="w-12">Clip {i + 1}</span>
+                  {SEGMENTS.map((name, k) => (
+                    <button
+                      key={k}
+                      onClick={() => setClips(clips.map((x, j) => (j === i ? (k as Segment) : x)))}
+                      className={`${segBtn} ${s === k ? "border-rose-500 bg-rose-50 dark:bg-rose-950/40" : "border-slate-200 dark:border-slate-800"}`}
+                    >
+                      {name.split(" ")[0]}
+                    </button>
+                  ))}
+                  {clips.length > 1 && (
+                    <button className="text-xs text-slate-500 hover:text-rose-600" onClick={() => setClips(clips.filter((_, j) => j !== i))}>
+                      remove
+                    </button>
+                  )}
+                </div>
+              ))}
+              {clips.length < 3 && (
+                <Btn variant="ghost" onClick={() => setClips([...clips, 1])}>
+                  Add clip
+                </Btn>
+              )}
+              <div className="text-xs text-slate-500">
+                Regurgitant jet location: {c.jet.map((w, k) => `${SEGMENTS[k].split(" ")[0]} ${Math.round(w * 100)}%`).join(" · ")}
+              </div>
+            </div>
+          )}
+        </Card>
+
+        <Card title="3 · Model-based plan search">
+          <p className="text-sm text-slate-600 dark:text-slate-300">
+            Simulates every candidate plan on this patient's twin and ranks them against the success criteria.
+          </p>
+          <div className="flex items-center gap-3 mt-3">
+            <Btn onClick={search}>Find best plan</Btn>
+            <span className="text-xs text-slate-500">{progress}</span>
+          </div>
+          {ranked && (
+            <div className="mt-3 overflow-auto max-h-80">
+              <table className="w-full text-xs tabular-nums">
+                <thead className="text-slate-500">
+                  <tr className="text-right">
+                    <th className="text-left font-medium">#</th>
+                    <th className="text-left font-medium">Plan</th>
+                    <th className="font-medium">{position === "aortic" ? "Grad." : "MR RF"}</th>
+                    <th className="font-medium">{position === "aortic" ? "AR RF" : "MV grad."}</th>
+                    <th className="font-medium">Criteria</th>
+                    <th />
+                  </tr>
+                </thead>
+                <tbody>
+                  {ranked.slice(0, 10).map((o, i) => (
+                    <tr key={o.label} className="text-right border-t border-slate-100 dark:border-slate-900">
+                      <td className="text-left py-1">{i + 1}</td>
+                      <td className="text-left pr-2">{o.label}</td>
+                      <td>{position === "aortic" ? f(o.sim.haemo.avMeanGradient, 1) : `${f(o.sim.haemo.mrRF)}%`}</td>
+                      <td>{position === "aortic" ? `${f(o.sim.haemo.arRF)}%` : f(o.sim.haemo.mvMeanGradient, 1)}</td>
+                      <td>
+                        {o.crit.filter((x) => x.pass).length}/{o.crit.length}
+                      </td>
+                      <td>
+                        <button className="text-rose-600 hover:underline ml-2" onClick={() => usePlan(o.plan)}>
+                          use
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </Card>
+      </aside>
+
+      <div className="xl:col-span-8 space-y-6">
+        <Card
+          title="Procedural result"
+          right={
+            <Btn
+              onClick={() => {
+                setParams(applyPlan(pre, plan, c.jet).params);
+                goLive();
+              }}
+            >
+              Send repaired heart to Live tab
+            </Btn>
+          }
+        >
+          <div className="text-sm font-medium mb-2">{out.label}</div>
+          <div className="grid sm:grid-cols-2 gap-2">
+            {out.crit.map((x) => (
+              <div
+                key={x.label}
+                className={`flex items-center justify-between rounded-lg px-3 py-2 text-sm ${
+                  x.pass ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-rose-50 dark:bg-rose-950/30"
+                }`}
+              >
+                <span>
+                  {x.pass ? "✓" : "✗"} {x.label}
+                </span>
+                <span className="font-mono">{x.value}</span>
+              </div>
+            ))}
+          </div>
+          <p className={`mt-3 text-sm font-medium ${allPass ? "text-emerald-700 dark:text-emerald-400" : "text-rose-700 dark:text-rose-400"}`}>
+            {allPass ? "All success criteria met on the twin." : "Not all success criteria met: try another plan or the plan search."}
+          </p>
+          {out.notes.map((n) => (
+            <p key={n} className="text-xs text-slate-500 mt-1">
+              • {n}
+            </p>
+          ))}
+        </Card>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Card title="Before vs after">
+            <table className="w-full text-sm tabular-nums">
+              <thead className="text-xs text-slate-500">
+                <tr className="text-right">
+                  <th className="text-left font-medium">Quantity</th>
+                  <th className="font-medium">Before</th>
+                  <th className="font-medium">After</th>
+                  <th className="font-medium">Change</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map(([name, get, d, unit, upGood]) => {
+                  const a = get(ph);
+                  const b = get(qh);
+                  const delta = b - a;
+                  const good = Math.abs(delta) < Math.pow(10, -d) ? null : upGood ? delta > 0 : delta < 0;
+                  return (
+                    <tr key={name} className="text-right border-t border-slate-100 dark:border-slate-900">
+                      <td className="text-left py-1">
+                        {name} <span className="text-xs text-slate-400">{unit}</span>
+                      </td>
+                      <td>{f(a, d)}</td>
+                      <td className="font-semibold">{f(b, d)}</td>
+                      <td className={good === null ? "text-slate-400" : good ? "text-emerald-600" : "text-rose-600"}>
+                        {good === null ? "0" : `${delta > 0 ? "+" : ""}${f(delta, d)}`}
+                      </td>
+                    </tr>
+                  );
+                })}
+                <tr className="text-right border-t border-slate-100 dark:border-slate-900">
+                  <td className="text-left py-1">
+                    Indexed aortic EOA <span className="text-xs text-slate-400">cm²/m²</span>
+                  </td>
+                  <td>{f(ph.avGorlinEOA / bsa, 2)}</td>
+                  <td className="font-semibold">{f(qh.avGorlinEOA / bsa, 2)}</td>
+                  <td className="text-slate-400">{ppm(qh.avGorlinEOA, bsa).label}</td>
+                </tr>
+              </tbody>
+            </table>
+          </Card>
+          <div className="space-y-6">
+            <Card title="Valve before and after">
+              <div className="flex justify-around items-center">
+                {position === "aortic" ? (
+                  <>
+                    <ValveFace area={pre.aortic.eoaMax} annulus={3.46} label={`Before (open), leak ${pre.aortic.roa.toFixed(2)} cm²`} damage={0.8} />
+                    <ValveFace
+                      area={applyPlan(pre, plan, c.jet).params.aortic.eoaMax}
+                      annulus={3.46}
+                      label={`After (open), leak ${applyPlan(pre, plan, c.jet).params.aortic.roa.toFixed(2)} cm²`}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <ValveFace area={pre.mitral.roa} annulus={1.2} leaflets={2} label="Regurgitant orifice before" damage={0.5} />
+                    <ValveFace area={applyPlan(pre, plan, c.jet).params.mitral.roa} annulus={1.2} leaflets={2} label="Regurgitant orifice after" />
+                  </>
+                )}
+              </div>
+            </Card>
+            <Card title="LV pressure–volume loop">
+              <Plot series={pvSeries} xLabel="LV volume (mL)" yLabel="LV pressure (mmHg)" closedLoop height={200} />
+            </Card>
+          </div>
+        </div>
+        <Card title="Pressures before (dashed) and after (solid) repair">
+          <Plot series={pSeries} xLabel="Time in cardiac cycle (ms)" yLabel="Pressure (mmHg)" height={240} />
+        </Card>
+      </div>
+    </div>
+  );
+};
+
 // ---------------------------------------------------------------- methods tab
 const REFS: { text: string; url: string }[] = [
   { text: "Mynard JP, Davidson MR, Penny DJ, Smolich JJ. A simple, versatile valve model for use in lumped parameter and one-dimensional cardiovascular models. Int J Numer Method Biomed Eng 2012;28:626–641.", url: "https://doi.org/10.1002/cnm.1466" },
@@ -934,6 +1344,10 @@ const REFS: { text: string; url: string }[] = [
   { text: "VARC-3 Writing Committee, Généreux P et al. Valve Academic Research Consortium 3: updated endpoint definitions for aortic valve clinical research. Eur Heart J 2021;42:1825–1857.", url: "https://doi.org/10.1093/eurheartj/ehaa799" },
   { text: "Bourguignon T et al. Very long-term outcomes of the Carpentier-Edwards Perimount valve in aortic position. Ann Thorac Surg 2015;100:853–859.", url: "https://pubmed.ncbi.nlm.nih.gov/26187006/" },
   { text: "Johnston DR et al. Long-term durability of bioprosthetic aortic valves: implications from 12,569 implants. Ann Thorac Surg 2015;99:1239–1247.", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5132179/" },
+  { text: "Valve-in-valve hemodynamics (VIVID registry: mean gradient 15.8 ± 8.9 mmHg after aortic ViV). Cardiac Interventions Today 2018.", url: "https://citoday.com/articles/2018-july-aug-supplement/aortic-valve-in-valve-hemodynamics" },
+  { text: "REDUCE registry: bioprosthetic valve fracturing vs standard post-dilatation in ViV-TAVI; predictors of post-procedure gradient.", url: "https://research.unipd.it/handle/11577/3556135" },
+  { text: "Oguz D et al. Clinical predictors and impact of postoperative mean gradient on outcome after transcatheter edge-to-edge mitral valve repair. Catheter Cardiovasc Interv 2021;98:E932–E937.", url: "https://pesquisa.bvsalud.org/bvsiec/resource/pt/mdl-34245208" },
+  { text: "Effects of residual MR and mean mitral valve pressure gradient on long-term outcome after MitraClip repair (255 patients; PMC6662353).", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6662353" },
   { text: "Lagarias JC, Reeds JA, Wright MH, Wright PE. Convergence properties of the Nelder–Mead simplex method in low dimensions. SIAM J Optim 1998;9:112–147.", url: "https://doi.org/10.1137/S1052623496303470" },
   { text: "Corral-Acero J et al. The 'Digital Twin' to enable the vision of precision cardiology. Eur Heart J 2020;41:4556–4564.", url: "https://doi.org/10.1093/eurheartj/ehaa159" },
 ];
@@ -969,6 +1383,13 @@ const MethodsTab: React.FC = () => (
             stages are then assigned from the simulated echo.
           </li>
           <li>
+            <b>Valve repair:</b> each procedure changes the twin's valve geometry and the circulation is re-solved. Valve-in-valve TAVR EOA depends
+            on the surgical valve's true internal diameter, valve design and fracture, and is calibrated to registry gradients. TEER clips close
+            the regurgitant orifice segment by segment but remove mitral orifice area (double orifice). Results are judged against VARC-3 valve
+            performance or TEER targets (residual MR, mean gradient ≤ 5 mmHg, LA v-wave fall), and a planner simulates every candidate plan
+            and ranks them.
+          </li>
+          <li>
             <b>Personalisation:</b> Nelder–Mead inverse solution for six hidden parameters from routine measurements; then a one-parameter fit of the
             deterioration time-scale to serial gradients for an individual forecast.
           </li>
@@ -991,6 +1412,10 @@ const MethodsTab: React.FC = () => (
           exist yet, so their size is a user assumption.
         </li>
         <li>Gradients are noise-free model values; real echo carries a few mmHg of measurement variability.</li>
+        <li>
+          The left atrium is coupled to one lumped pulmonary-venous reservoir, so MR v-waves are damped; TEER success is judged on residual MR,
+          mitral gradient and forward flow. Repair procedure models are calibrated to registry averages, not to device-specific bench data.
+        </li>
       </ul>
     </Card>
     <Card title="References">
@@ -1043,10 +1468,11 @@ const ValidationTable: React.FC = () => {
 };
 
 // ---------------------------------------------------------------- app
-type Tab = "live" | "lifetime" | "personalise" | "methods";
+type Tab = "live" | "lifetime" | "repair" | "personalise" | "methods";
 const TABS: { id: Tab; label: string }[] = [
   { id: "live", label: "Live haemodynamics" },
   { id: "lifetime", label: "Lifetime & durability" },
+  { id: "repair", label: "Valve repair planner" },
   { id: "personalise", label: "Personalise (inverse model)" },
   { id: "methods", label: "Methods & references" },
 ];
@@ -1105,6 +1531,7 @@ export default function App() {
       <main className="mx-auto max-w-[1400px] px-4 py-6">
         {tab === "live" && <LiveTab params={params} setParams={setParams} bsa={bsa} />}
         {tab === "lifetime" && <LifetimeTab params={params} bsa={bsa} />}
+        {tab === "repair" && <RepairTab params={params} setParams={setParams} bsa={bsa} goLive={() => setTab("live")} />}
         {tab === "personalise" && (
           <PersonaliseTab
             params={params}
