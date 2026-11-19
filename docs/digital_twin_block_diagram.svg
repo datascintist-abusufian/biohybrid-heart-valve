@@ -1,0 +1,200 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="510pt" height="448pt" viewBox="0 0 510 448" font-family="Arial, Helvetica, 'Liberation Sans', sans-serif">
+<defs>
+<marker id="ah" viewBox="0 0 8 8" refX="7.2" refY="4" markerWidth="5.2" markerHeight="5.2" orient="auto">
+<path d="M0,0.6 L7.6,4 L0,7.4 z" fill="#5B6573"/></marker>
+<marker id="ahp" viewBox="0 0 8 8" refX="7.2" refY="4" markerWidth="5.2" markerHeight="5.2" orient="auto">
+<path d="M0,0.6 L7.6,4 L0,7.4 z" fill="#674A99"/></marker>
+<marker id="ahs" viewBox="0 0 8 8" refX="0.8" refY="4" markerWidth="5.2" markerHeight="5.2" orient="auto">
+<path d="M8,0.6 L0.4,4 L8,7.4 z" fill="#5B6573"/></marker>
+</defs>
+<rect width="510" height="448" fill="#fff"/>
+<text x="0" y="10" font-size="8.5" font-weight="bold" fill="#000">a</text>
+<text x="8" y="22" font-size="6" fill="#5B6573" letter-spacing="0.4">INPUTS</text>
+<text x="112" y="22" font-size="6" fill="#5B6573" letter-spacing="0.4">PERSONALISATION</text>
+<text x="214" y="22" font-size="6" fill="#5B6573" letter-spacing="0.4">DIGITAL TWIN</text>
+<text x="322" y="22" font-size="6" fill="#5B6573" letter-spacing="0.4">ANALYSES</text>
+<text x="442" y="22" font-size="6" fill="#5B6573" letter-spacing="0.4">OUTPUTS</text>
+<rect x="8" y="28" width="92" height="96" rx="3" fill="#EEF0F3" stroke="#5B6573" stroke-width="0.8"/>
+<text xml:space="preserve" x="14.00" y="39.00" font-size="7.2" font-weight="bold" text-anchor="start" fill="#5B6573"><tspan>Baseline study</tspan></text>
+<text xml:space="preserve" x="14.00" y="49.20" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Cuff BP, heart rate</tspan></text>
+<text xml:space="preserve" x="14.00" y="57.40" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Echo: LVEF, EDV</tspan></text>
+<text xml:space="preserve" x="14.00" y="65.60" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Valve: mean gradient,</tspan></text>
+<text xml:space="preserve" x="14.00" y="73.80" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>   EOA, AR fraction</tspan></text>
+<text xml:space="preserve" x="14.00" y="82.00" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Height, weight → BSA</tspan></text>
+<text xml:space="preserve" x="14.00" y="90.20" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Any subset accepted</tspan></text>
+<rect x="8" y="134" width="92" height="50" rx="3" fill="#EEF0F3" stroke="#5B6573" stroke-width="0.8"/>
+<text xml:space="preserve" x="14.00" y="145.00" font-size="7.2" font-weight="bold" text-anchor="start" fill="#5B6573"><tspan>Serial follow-up</tspan></text>
+<text xml:space="preserve" x="14.00" y="155.20" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Mean gradient at</tspan></text>
+<text xml:space="preserve" x="14.00" y="163.40" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>years </tspan><tspan font-style="italic">t</tspan><tspan dy="1.60" font-size="4.54">1</tspan><tspan dy="-1.60">, </tspan><tspan font-style="italic">t</tspan><tspan dy="1.60" font-size="4.54">2</tspan><tspan dy="-1.60">, …, </tspan><tspan font-style="italic">t</tspan><tspan dy="1.60" font-size="4.54">n</tspan></text>
+<rect x="112" y="28" width="90" height="96" rx="3" fill="#E3EDF8" stroke="#2F6DB0" stroke-width="0.8"/>
+<text xml:space="preserve" x="118.00" y="39.00" font-size="7.2" font-weight="bold" text-anchor="start" fill="#2F6DB0"><tspan>Inverse calibration</tspan></text>
+<text xml:space="preserve" x="118.00" y="49.20" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Nelder–Mead, log space</tspan></text>
+<text xml:space="preserve" x="118.00" y="57.40" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>6 hidden parameters:</tspan></text>
+<text xml:space="preserve" x="118.00" y="65.60" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan font-style="italic">E</tspan><tspan dy="1.60" font-size="4.54">es</tspan><tspan dy="-1.60">, </tspan><tspan font-style="italic">R</tspan><tspan dy="1.60" font-size="4.54">sys</tspan><tspan dy="-1.60">, </tspan><tspan font-style="italic">C</tspan><tspan dy="1.60" font-size="4.54">a</tspan><tspan dy="-1.60">, </tspan><tspan font-style="italic">V</tspan><tspan dy="1.60" font-size="4.54">s</tspan><tspan dy="-1.60">,</tspan></text>
+<text xml:space="preserve" x="118.00" y="73.80" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>EOA, ROA</tspan></text>
+<text xml:space="preserve" x="118.00" y="82.00" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>min Σ </tspan><tspan font-style="italic">z</tspan><tspan dy="-2.40" font-size="4.54">2</tspan><tspan dy="2.40"> + weak prior</tspan></text>
+<text xml:space="preserve" x="118.00" y="90.20" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>~300 model solves, ~1 s</tspan></text>
+<rect x="112" y="134" width="90" height="50" rx="3" fill="#E3EDF8" stroke="#2F6DB0" stroke-width="0.8"/>
+<text xml:space="preserve" x="118.00" y="145.00" font-size="7.2" font-weight="bold" text-anchor="start" fill="#2F6DB0"><tspan>Prognostic fit</tspan></text>
+<text xml:space="preserve" x="118.00" y="155.20" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Golden-section search</tspan></text>
+<text xml:space="preserve" x="118.00" y="163.40" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>for </tspan><tspan font-style="italic">T</tspan><tspan> in </tspan><tspan font-style="italic">d</tspan><tspan> = (</tspan><tspan font-style="italic">t</tspan><tspan>/</tspan><tspan font-style="italic">T</tspan><tspan>)</tspan><tspan dy="-2.40" font-size="4.54">3</tspan></text>
+<rect x="214" y="28" width="94" height="156" rx="3" fill="#FBE6E8" stroke="#B8323F" stroke-width="1.4"/>
+<text xml:space="preserve" x="220.00" y="40.00" font-size="7.6" font-weight="bold" text-anchor="start" fill="#B8323F"><tspan>Patient-specific</tspan></text>
+<text xml:space="preserve" x="220.00" y="49.50" font-size="7.6" font-weight="bold" text-anchor="start" fill="#B8323F"><tspan>digital twin</tspan></text>
+<text xml:space="preserve" x="220.00" y="64.00" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Closed-loop lumped</tspan></text>
+<text xml:space="preserve" x="220.00" y="72.60" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>circulation (panel b)</tspan></text>
+<text xml:space="preserve" x="220.00" y="81.20" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>LA/LV time-varying</tspan></text>
+<text xml:space="preserve" x="220.00" y="89.80" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>   elastance + EDPVR</tspan></text>
+<text xml:space="preserve" x="220.00" y="98.40" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Mynard dynamic valves</tspan></text>
+<text xml:space="preserve" x="220.00" y="107.00" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>3-element Windkessel</tspan></text>
+<text xml:space="preserve" x="220.00" y="115.60" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Semi-implicit solver,</tspan></text>
+<text xml:space="preserve" x="220.00" y="124.20" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>   Δ</tspan><tspan font-style="italic">t</tspan><tspan> = 0.2 ms</tspan></text>
+<text xml:space="preserve" x="220.00" y="132.80" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Periodic steady state</tspan></text>
+<path d="M236,170 L236,150 Q242,144 262,146 L274,148 L274,170 Q256,173 236,170 z" fill="none" stroke="#B8323F" stroke-width="1"/>
+<text xml:space="preserve" x="280.00" y="156.00" font-size="5.6" font-weight="normal" text-anchor="start" fill="#5B6573"><tspan>PV loop</tspan></text>
+<text xml:space="preserve" x="280.00" y="164.00" font-size="5.6" font-weight="normal" text-anchor="start" fill="#5B6573"><tspan>per beat</tspan></text>
+<rect x="322" y="28" width="106" height="48" rx="3" fill="#E1F2EE" stroke="#1E7F69" stroke-width="0.8"/>
+<text xml:space="preserve" x="328.00" y="39.00" font-size="7.2" font-weight="bold" text-anchor="start" fill="#1E7F69"><tspan>Haemodynamic read-out</tspan></text>
+<text xml:space="preserve" x="328.00" y="49.00" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>4</tspan><tspan font-style="italic">v</tspan><tspan dy="-2.40" font-size="4.54">2</tspan><tspan dy="2.40">, </tspan><tspan font-style="italic">V</tspan><tspan dy="1.60" font-size="4.54">max</tspan><tspan dy="-1.60">, Gorlin EOA, DVI,</tspan></text>
+<text xml:space="preserve" x="328.00" y="57.00" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>RF, CO, PV loop; ASE grade</tspan></text>
+<rect x="322" y="82" width="106" height="48" rx="3" fill="#FCEFD9" stroke="#B87203" stroke-width="0.8"/>
+<text xml:space="preserve" x="328.00" y="93.00" font-size="7.2" font-weight="bold" text-anchor="start" fill="#B87203"><tspan>Lifetime durability</tspan></text>
+<text xml:space="preserve" x="328.00" y="103.00" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Weibull SVD, annual re-solve</tspan></text>
+<text xml:space="preserve" x="328.00" y="111.00" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>VARC-3 stage 0–3 over 25 y</tspan></text>
+<rect x="322" y="136" width="106" height="48" rx="3" fill="#ECE6F5" stroke="#674A99" stroke-width="0.8"/>
+<text xml:space="preserve" x="328.00" y="147.00" font-size="7.2" font-weight="bold" text-anchor="start" fill="#674A99"><tspan>Virtual repair planner</tspan></text>
+<text xml:space="preserve" x="328.00" y="157.00" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>ViV TAVR, redo AVR, TEER,</tspan></text>
+<text xml:space="preserve" x="328.00" y="165.00" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>biohybrid repair*; plan search</tspan></text>
+<rect x="442" y="28" width="66" height="156" rx="3" fill="#E9EBEE" stroke="#2C333C" stroke-width="0.8"/>
+<text xml:space="preserve" x="448.00" y="39.00" font-size="6.6" font-weight="bold" text-anchor="start" fill="#2C333C"><tspan>Decision support</tspan></text>
+<text xml:space="preserve" x="448.00" y="49.20" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Before/after</tspan></text>
+<text xml:space="preserve" x="448.00" y="57.40" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>   haemodynamics</tspan></text>
+<text xml:space="preserve" x="448.00" y="65.60" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Stage timeline</tspan></text>
+<text xml:space="preserve" x="448.00" y="73.80" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Time to Stage 2/3</tspan></text>
+<text xml:space="preserve" x="448.00" y="82.00" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Ranked repair</tspan></text>
+<text xml:space="preserve" x="448.00" y="90.20" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>   plans</tspan></text>
+<text xml:space="preserve" x="448.00" y="98.40" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Success criteria</tspan></text>
+<text xml:space="preserve" x="448.00" y="106.60" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>CSV export</tspan></text>
+<text xml:space="preserve" x="448.00" y="114.80" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Web app (React,</tspan></text>
+<text xml:space="preserve" x="448.00" y="123.00" font-size="6.3" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>   in-browser)</tspan></text>
+<line x1="100" y1="76" x2="112" y2="76" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)"/>
+<line x1="100" y1="159" x2="112" y2="159" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)"/>
+<line x1="202" y1="76" x2="214" y2="76" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)"/>
+<text xml:space="preserve" x="208.00" y="72.00" font-size="6" font-weight="normal" text-anchor="middle" fill="#5B6573"><tspan>θ</tspan></text>
+<line x1="202" y1="159" x2="214" y2="159" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)"/>
+<text xml:space="preserve" x="208.00" y="155.00" font-size="6" font-weight="normal" text-anchor="middle" fill="#5B6573"><tspan font-style="italic">T</tspan></text>
+<line x1="308" y1="52" x2="322" y2="52" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)" marker-start="url(#ahs)"/>
+<line x1="308" y1="106" x2="322" y2="106" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)" marker-start="url(#ahs)"/>
+<line x1="308" y1="160" x2="322" y2="160" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)" marker-start="url(#ahs)"/>
+<line x1="428" y1="52" x2="442" y2="52" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)"/>
+<line x1="428" y1="106" x2="442" y2="106" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)"/>
+<line x1="428" y1="160" x2="442" y2="160" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)"/>
+<path d="M375,184 L375,196 L261,196 L261,185.5" fill="none" stroke="#674A99" stroke-width="0.9" marker-end="url(#ahp)" stroke-dasharray="2.5 2"/>
+<text xml:space="preserve" x="318.00" y="204.00" font-size="5.8" font-weight="normal" text-anchor="middle" fill="#674A99"><tspan>post-repair valve geometry fed back to the twin</tspan></text>
+<text xml:space="preserve" x="508.00" y="204.00" font-size="5.6" font-weight="normal" text-anchor="end" fill="#5B6573"><tspan>* hypothetical, labelled in the app</tspan></text>
+<text x="0" y="224" font-size="8.5" font-weight="bold" fill="#000">b</text>
+<text x="14" y="224" font-size="6" fill="#5B6573" letter-spacing="0.4">CLOSED-LOOP CIRCULATION (ONE HEART BEAT)</text>
+<rect x="14" y="244" width="54" height="62" rx="3" fill="#FBE6E8" stroke="#B8323F" stroke-width="0.9"/>
+<text xml:space="preserve" x="41.00" y="255.00" font-size="7" font-weight="bold" text-anchor="middle" fill="#B8323F"><tspan>LA</tspan></text>
+<text xml:space="preserve" x="41.00" y="264.00" font-size="5.8" font-weight="normal" text-anchor="middle" fill="#1F2328"><tspan font-style="italic">E</tspan><tspan dy="1.60" font-size="4.18">LA</tspan><tspan dy="-1.60">(</tspan><tspan font-style="italic">t</tspan><tspan>)</tspan></text>
+<text xml:space="preserve" x="41.00" y="271.50" font-size="5.8" font-weight="normal" text-anchor="middle" fill="#1F2328"><tspan font-style="italic">V</tspan><tspan dy="1.60" font-size="4.18">0,LA</tspan></text>
+<polyline points="20.00,288.14 20.52,289.31 21.05,291.74 21.57,294.67 22.10,297.02 22.62,298.45 23.15,299.21 23.68,299.59 24.20,299.79 24.73,299.88 25.25,299.94 25.77,299.96 26.30,299.98 26.82,299.99 27.35,299.99 27.88,300.00 28.40,300.00 28.93,300.00 29.45,300.00 29.98,300.00 30.50,300.00 31.02,300.00 31.55,300.00 32.08,300.00 32.60,300.00 33.12,300.00 33.65,300.00 34.17,300.00 34.70,300.00 35.23,300.00 35.75,300.00 36.27,300.00 36.80,300.00 37.33,300.00 37.85,300.00 38.38,300.00 38.90,300.00 39.42,300.00 39.95,300.00 40.48,300.00 41.00,300.00 41.52,300.00 42.05,300.00 42.58,300.00 43.10,300.00 43.62,300.00 44.15,300.00 44.67,300.00 45.20,300.00 45.73,300.00 46.25,300.00 46.77,300.00 47.30,300.00 47.83,300.00 48.35,300.00 48.88,300.00 49.40,300.00 49.92,300.00 50.45,300.00 50.98,300.00 51.50,300.00 52.02,300.00 52.55,300.00 53.08,300.00 53.60,300.00 54.12,300.00 54.65,300.00 55.17,300.00 55.70,300.00 56.23,298.84 56.75,297.33 57.27,295.81 57.80,294.37 58.33,293.07 58.85,291.89 59.38,290.84 59.90,289.91 60.42,289.09 60.95,288.41 61.48,288.00 62.00,288.14" fill="none" stroke="#B8323F" stroke-width="0.8"/>
+<line x1="20" y1="300" x2="62" y2="300" stroke="#5B6573" stroke-width="0.4"/>
+<text xml:space="preserve" x="21.00" y="287.00" font-size="5" font-weight="normal" text-anchor="start" fill="#5B6573"><tspan font-style="italic">e</tspan><tspan>(</tspan><tspan font-style="italic">t</tspan><tspan>)</tspan></text>
+<line x1="68" y1="274" x2="79" y2="274" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)"/>
+<rect x="79" y="261" width="22" height="26" rx="2" fill="#fff" stroke="#B8323F" stroke-width="0.9"/>
+<path d="M79,261 Q88,269 88.8,274" fill="none" stroke="#B8323F" stroke-width="0.9"/>
+<path d="M79,287 Q88,279 88.8,274" fill="none" stroke="#B8323F" stroke-width="0.9"/>
+<path d="M101,261 Q92,269 91.2,274" fill="none" stroke="#B8323F" stroke-width="0.9" opacity="0.35"/>
+<text xml:space="preserve" x="90.00" y="296.00" font-size="6.2" font-weight="bold" text-anchor="middle" fill="#B8323F"><tspan>MV</tspan></text>
+<line x1="101" y1="274" x2="112" y2="274" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)"/>
+<text xml:space="preserve" x="90.00" y="252.00" font-size="5.8" font-weight="normal" text-anchor="middle" fill="#5B6573"><tspan font-style="italic">q</tspan><tspan dy="1.60" font-size="4.18">MV</tspan></text>
+<rect x="112" y="244" width="64" height="62" rx="3" fill="#FBE6E8" stroke="#B8323F" stroke-width="0.9"/>
+<text xml:space="preserve" x="144.00" y="255.00" font-size="7" font-weight="bold" text-anchor="middle" fill="#B8323F"><tspan>LV</tspan></text>
+<text xml:space="preserve" x="144.00" y="264.00" font-size="5.8" font-weight="normal" text-anchor="middle" fill="#1F2328"><tspan font-style="italic">E</tspan><tspan dy="1.60" font-size="4.18">es</tspan><tspan dy="-1.60">(</tspan><tspan font-style="italic">V</tspan><tspan> − </tspan><tspan font-style="italic">V</tspan><tspan dy="1.60" font-size="4.18">0</tspan><tspan dy="-1.60">)·</tspan><tspan font-style="italic">e</tspan><tspan>(</tspan><tspan font-style="italic">t</tspan><tspan>)</tspan></text>
+<text xml:space="preserve" x="144.00" y="271.50" font-size="5.8" font-weight="normal" text-anchor="middle" fill="#1F2328"><tspan>+ EDPVR</tspan></text>
+<polyline points="118.00,300.00 118.65,299.66 119.30,299.18 119.95,298.64 120.60,298.07 121.25,297.50 121.90,296.92 122.55,296.35 123.20,295.80 123.85,295.27 124.50,294.75 125.15,294.25 125.80,293.77 126.45,293.31 127.10,292.87 127.75,292.45 128.40,292.05 129.05,291.67 129.70,291.31 130.35,290.96 131.00,290.63 131.65,290.31 132.30,290.01 132.95,289.72 133.60,289.44 134.25,289.18 134.90,288.93 135.55,288.69 136.20,288.47 136.85,288.26 137.50,288.10 138.15,288.00 138.80,288.05 139.45,288.39 140.10,289.25 140.75,290.84 141.40,293.07 142.05,295.40 142.70,297.27 143.35,298.49 144.00,299.19 144.65,299.57 145.30,299.77 145.95,299.88 146.60,299.93 147.25,299.96 147.90,299.98 148.55,299.99 149.20,299.99 149.85,300.00 150.50,300.00 151.15,300.00 151.80,300.00 152.45,300.00 153.10,300.00 153.75,300.00 154.40,300.00 155.05,300.00 155.70,300.00 156.35,300.00 157.00,300.00 157.65,300.00 158.30,300.00 158.95,300.00 159.60,300.00 160.25,300.00 160.90,300.00 161.55,300.00 162.20,300.00 162.85,300.00 163.50,300.00 164.15,300.00 164.80,300.00 165.45,300.00 166.10,300.00 166.75,300.00 167.40,300.00 168.05,300.00 168.70,300.00 169.35,300.00 170.00,300.00" fill="none" stroke="#B8323F" stroke-width="0.8"/>
+<line x1="118" y1="300" x2="170" y2="300" stroke="#5B6573" stroke-width="0.4"/>
+<text xml:space="preserve" x="160.00" y="287.00" font-size="5" font-weight="normal" text-anchor="start" fill="#5B6573"><tspan font-style="italic">e</tspan><tspan>(</tspan><tspan font-style="italic">t</tspan><tspan>)</tspan></text>
+<line x1="176" y1="274" x2="187" y2="274" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)"/>
+<rect x="187" y="261" width="22" height="26" rx="2" fill="#fff" stroke="#B8323F" stroke-width="1.3"/>
+<path d="M187,261 Q196,269 196.8,274" fill="none" stroke="#B8323F" stroke-width="1.3"/>
+<path d="M187,287 Q196,279 196.8,274" fill="none" stroke="#B8323F" stroke-width="1.3"/>
+<path d="M209,261 Q200,269 199.2,274" fill="none" stroke="#B8323F" stroke-width="1.3" opacity="0.35"/>
+<text xml:space="preserve" x="198.00" y="296.00" font-size="6.2" font-weight="bold" text-anchor="middle" fill="#B8323F"><tspan>AV</tspan></text>
+<text xml:space="preserve" x="198.00" y="252.00" font-size="5.8" font-weight="normal" text-anchor="middle" fill="#5B6573"><tspan font-style="italic">q</tspan><tspan dy="1.60" font-size="4.18">AV</tspan></text>
+<text xml:space="preserve" x="198.00" y="305.00" font-size="5.6" font-weight="normal" text-anchor="middle" fill="#B8323F"><tspan>biohybrid</tspan></text>
+<line x1="209" y1="274" x2="220" y2="274" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)"/>
+<rect x="220" y="244" width="84" height="62" rx="3" fill="#E1F2EE" stroke="#1E7F69" stroke-width="0.9"/>
+<text xml:space="preserve" x="262.00" y="255.00" font-size="7" font-weight="bold" text-anchor="middle" fill="#1E7F69"><tspan>Systemic arteries</tspan></text>
+<path d="M226,274 L229.0,274 L230.5,276.4 L233.5,271.6 L236.5,276.4 L239.5,271.6 L242.5,276.4 L245.5,271.6 L247.0,274 L250,274" fill="none" stroke="#1F2328" stroke-width="0.7"/>
+<text xml:space="preserve" x="238.00" y="269.00" font-size="5.6" font-weight="normal" text-anchor="middle" fill="#1F2328"><tspan font-style="italic">Z</tspan><tspan dy="1.60" font-size="4.03">c</tspan></text>
+<line x1="250" y1="274" x2="298" y2="274" stroke="#1F2328" stroke-width="0.7"/>
+<line x1="264" y1="274" x2="264" y2="283" stroke="#1F2328" stroke-width="0.7"/>
+<line x1="259" y1="283" x2="269" y2="283" stroke="#1F2328" stroke-width="0.9"/>
+<line x1="259" y1="286" x2="269" y2="286" stroke="#1F2328" stroke-width="0.9"/>
+<line x1="264" y1="286" x2="264" y2="294" stroke="#1F2328" stroke-width="0.7"/>
+<line x1="260" y1="294" x2="268" y2="294" stroke="#1F2328" stroke-width="0.7"/>
+<text xml:space="preserve" x="271.00" y="287.00" font-size="5.6" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan font-style="italic">C</tspan><tspan dy="1.60" font-size="4.03">a</tspan></text>
+<text xml:space="preserve" x="286.00" y="269.00" font-size="5.6" font-weight="normal" text-anchor="middle" fill="#1F2328"><tspan font-style="italic">P</tspan><tspan dy="1.60" font-size="4.03">a</tspan></text>
+<circle cx="286" cy="274" r="1.1" fill="#1F2328"/>
+<text xml:space="preserve" x="262.00" y="302.00" font-size="5.4" font-weight="normal" text-anchor="middle" fill="#5B6573"><tspan>3-element Windkessel</tspan></text>
+<path d="M262.0,306 L262.0,332" fill="none" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)"/>
+<text xml:space="preserve" x="267.00" y="320.00" font-size="6" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan font-style="italic">R</tspan><tspan dy="1.60" font-size="4.32">sys</tspan></text>
+<text xml:space="preserve" x="267.00" y="328.00" font-size="5.8" font-weight="normal" text-anchor="start" fill="#5B6573"><tspan font-style="italic">q</tspan><tspan dy="1.60" font-size="4.18">sys</tspan></text>
+<rect x="112" y="332" width="192" height="28" rx="3" fill="#EEF0F3" stroke="#5B6573" stroke-width="0.9"/>
+<text xml:space="preserve" x="208.00" y="343.50" font-size="7" font-weight="bold" text-anchor="middle" fill="#5B6573"><tspan>Venous + pulmonary reservoir</tspan></text>
+<text xml:space="preserve" x="208.00" y="353.00" font-size="5.8" font-weight="normal" text-anchor="middle" fill="#1F2328"><tspan>compliance </tspan><tspan font-style="italic">C</tspan><tspan dy="1.60" font-size="4.18">v</tspan><tspan dy="-1.60">, pressure </tspan><tspan font-style="italic">P</tspan><tspan dy="1.60" font-size="4.18">v</tspan><tspan dy="-1.60"> = </tspan><tspan font-style="italic">V</tspan><tspan dy="1.60" font-size="4.18">v</tspan><tspan dy="-1.60">/</tspan><tspan font-style="italic">C</tspan><tspan dy="1.60" font-size="4.18">v</tspan></text>
+<path d="M112,346 L41,346 L41,306" fill="none" stroke="#5B6573" stroke-width="0.9" marker-end="url(#ah)"/>
+<text xml:space="preserve" x="48.00" y="342.00" font-size="6" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan font-style="italic">R</tspan><tspan dy="1.60" font-size="4.32">ven</tspan><tspan dy="-1.60">, </tspan><tspan font-style="italic">q</tspan><tspan dy="1.60" font-size="4.32">ven</tspan></text>
+<text xml:space="preserve" x="14.00" y="374.00" font-size="6" font-weight="normal" text-anchor="start" fill="#5B6573"><tspan>Volume conservation: d</tspan><tspan font-style="italic">V</tspan><tspan>/d</tspan><tspan font-style="italic">t</tspan><tspan> = </tspan><tspan font-style="italic">q</tspan><tspan dy="1.60" font-size="4.32">in</tspan><tspan dy="-1.60"> − </tspan><tspan font-style="italic">q</tspan><tspan dy="1.60" font-size="4.32">out</tspan><tspan dy="-1.60"> for each compartment; total stressed volume fixed.</tspan></text>
+<text xml:space="preserve" x="14.00" y="383.00" font-size="6" font-weight="normal" text-anchor="start" fill="#5B6573"><tspan>Outputs per beat: </tspan><tspan font-style="italic">P</tspan><tspan dy="1.60" font-size="4.32">LV</tspan><tspan dy="-1.60">, </tspan><tspan font-style="italic">P</tspan><tspan dy="1.60" font-size="4.32">Ao</tspan><tspan dy="-1.60">, </tspan><tspan font-style="italic">P</tspan><tspan dy="1.60" font-size="4.32">LA</tspan><tspan dy="-1.60">, </tspan><tspan font-style="italic">V</tspan><tspan dy="1.60" font-size="4.32">LV</tspan><tspan dy="-1.60">, </tspan><tspan font-style="italic">q</tspan><tspan dy="1.60" font-size="4.32">AV</tspan><tspan dy="-1.60">, </tspan><tspan font-style="italic">q</tspan><tspan dy="1.60" font-size="4.32">MV</tspan><tspan dy="-1.60">, valve states ζ</tspan><tspan dy="1.60" font-size="4.32">AV</tspan><tspan dy="-1.60">, ζ</tspan><tspan dy="1.60" font-size="4.32">MV</tspan><tspan dy="-1.60">.</tspan></text>
+<rect x="14" y="394" width="290" height="40" rx="3" fill="#F7F8FA" stroke="#C9CED6" stroke-width="0.7"/>
+<text xml:space="preserve" x="20.00" y="405.00" font-size="6.6" font-weight="bold" text-anchor="start" fill="#1F2328"><tspan>Default twin vs normal physiology</tspan></text>
+<text xml:space="preserve" x="20.00" y="417.00" font-size="5.6" font-weight="normal" text-anchor="start" fill="#5B6573"><tspan>BP</tspan></text>
+<text xml:space="preserve" x="20.00" y="426.00" font-size="6.3" font-weight="bold" text-anchor="start" fill="#1F2328"><tspan>116/70 mmHg</tspan></text>
+<text xml:space="preserve" x="67.50" y="417.00" font-size="5.6" font-weight="normal" text-anchor="start" fill="#5B6573"><tspan>CO</tspan></text>
+<text xml:space="preserve" x="67.50" y="426.00" font-size="6.3" font-weight="bold" text-anchor="start" fill="#1F2328"><tspan>5.6 L/min</tspan></text>
+<text xml:space="preserve" x="115.00" y="417.00" font-size="5.6" font-weight="normal" text-anchor="start" fill="#5B6573"><tspan>LVEF</tspan></text>
+<text xml:space="preserve" x="115.00" y="426.00" font-size="6.3" font-weight="bold" text-anchor="start" fill="#1F2328"><tspan>60%</tspan></text>
+<text xml:space="preserve" x="162.50" y="417.00" font-size="5.6" font-weight="normal" text-anchor="start" fill="#5B6573"><tspan>LAP</tspan></text>
+<text xml:space="preserve" x="162.50" y="426.00" font-size="6.3" font-weight="bold" text-anchor="start" fill="#1F2328"><tspan>9 mmHg</tspan></text>
+<text xml:space="preserve" x="210.00" y="417.00" font-size="5.6" font-weight="normal" text-anchor="start" fill="#5B6573"><tspan>AV grad.</tspan></text>
+<text xml:space="preserve" x="210.00" y="426.00" font-size="6.3" font-weight="bold" text-anchor="start" fill="#1F2328"><tspan>11 mmHg</tspan></text>
+<text xml:space="preserve" x="257.50" y="417.00" font-size="5.6" font-weight="normal" text-anchor="start" fill="#5B6573"><tspan>EOA</tspan></text>
+<text xml:space="preserve" x="257.50" y="426.00" font-size="6.3" font-weight="bold" text-anchor="start" fill="#1F2328"><tspan>1.76 cm²</tspan></text>
+<text x="310" y="224" font-size="8.5" font-weight="bold" fill="#000">c</text>
+<text x="322" y="224" font-size="6" fill="#5B6573" letter-spacing="0.4">SUB-MODELS</text>
+<rect x="316" y="232" width="192" height="58" rx="3" fill="#FBE6E8" stroke="#B8323F" stroke-width="0.8"/>
+<text xml:space="preserve" x="322.00" y="243.00" font-size="7.2" font-weight="bold" text-anchor="start" fill="#B8323F"><tspan>Dynamic valve (Mynard 2012)</tspan></text>
+<text xml:space="preserve" x="322.00" y="254.60" font-size="6.1" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Δ</tspan><tspan font-style="italic">p</tspan><tspan> = </tspan><tspan font-style="italic">B q</tspan><tspan>|</tspan><tspan font-style="italic">q</tspan><tspan>| + </tspan><tspan font-style="italic">L</tspan><tspan> d</tspan><tspan font-style="italic">q</tspan><tspan>/d</tspan><tspan font-style="italic">t</tspan><tspan>,   </tspan><tspan font-style="italic">B</tspan><tspan> = ρ/2</tspan><tspan font-style="italic">A</tspan><tspan dy="-2.40" font-size="4.39">2</tspan><tspan dy="2.40">,   </tspan><tspan font-style="italic">L</tspan><tspan> = ρℓ/</tspan><tspan font-style="italic">A</tspan></text>
+<text xml:space="preserve" x="322.00" y="264.20" font-size="6.1" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan font-style="italic">A</tspan><tspan> = (</tspan><tspan font-style="italic">A</tspan><tspan dy="1.60" font-size="4.39">max</tspan><tspan dy="-1.60"> − </tspan><tspan font-style="italic">A</tspan><tspan dy="1.60" font-size="4.39">min</tspan><tspan dy="-1.60">) ζ + </tspan><tspan font-style="italic">A</tspan><tspan dy="1.60" font-size="4.39">min</tspan></text>
+<text xml:space="preserve" x="322.00" y="273.80" font-size="6.1" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>dζ/d</tspan><tspan font-style="italic">t</tspan><tspan> = (1 − ζ) </tspan><tspan font-style="italic">K</tspan><tspan dy="1.60" font-size="4.39">vo</tspan><tspan dy="-1.60"> Δ</tspan><tspan font-style="italic">p</tspan><tspan>  if Δ</tspan><tspan font-style="italic">p</tspan><tspan> &gt; 0;   ζ </tspan><tspan font-style="italic">K</tspan><tspan dy="1.60" font-size="4.39">vc</tspan><tspan dy="-1.60"> Δ</tspan><tspan font-style="italic">p</tspan><tspan>  otherwise</tspan></text>
+<text xml:space="preserve" x="322.00" y="283.40" font-size="6.1" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Stenosis lowers </tspan><tspan font-style="italic">A</tspan><tspan dy="1.60" font-size="4.39">max</tspan><tspan dy="-1.60">; regurgitation raises </tspan><tspan font-style="italic">A</tspan><tspan dy="1.60" font-size="4.39">min</tspan><tspan dy="-1.60"> (= ROA)</tspan></text>
+<rect x="316" y="297" width="192" height="80" rx="3" fill="#FCEFD9" stroke="#B87203" stroke-width="0.8"/>
+<text xml:space="preserve" x="322.00" y="308.00" font-size="7.2" font-weight="bold" text-anchor="start" fill="#B87203"><tspan>Structural valve deterioration</tspan></text>
+<text xml:space="preserve" x="322.00" y="319.20" font-size="6.1" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan font-style="italic">S</tspan><tspan>(</tspan><tspan font-style="italic">t</tspan><tspan>) = exp[−(</tspan><tspan font-style="italic">t</tspan><tspan>/λ)</tspan><tspan dy="-2.40" font-size="4.39">3</tspan><tspan dy="2.40">]</tspan></text>
+<text xml:space="preserve" x="322.00" y="328.40" font-size="6.1" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>λ = 20 e</tspan><tspan dy="-2.40" font-size="4.39">0.0302(age − 51)</tspan><tspan dy="2.40"> y</tspan></text>
+<text xml:space="preserve" x="322.00" y="337.60" font-size="6.1" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan font-style="italic">d</tspan><tspan>(</tspan><tspan font-style="italic">t</tspan><tspan>) = (</tspan><tspan font-style="italic">t</tspan><tspan>/</tspan><tspan font-style="italic">T</tspan><tspan>)</tspan><tspan dy="-2.40" font-size="4.39">3</tspan></text>
+<text xml:space="preserve" x="322.00" y="346.80" font-size="6.1" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>EOA = EOA</tspan><tspan dy="1.60" font-size="4.39">0</tspan><tspan dy="-1.60">(1 − 0.5</tspan><tspan font-style="italic">d</tspan><tspan dy="1.60" font-size="4.39">s</tspan><tspan dy="-1.60">)</tspan></text>
+<text xml:space="preserve" x="322.00" y="356.00" font-size="6.1" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>ROA = ROA</tspan><tspan dy="1.60" font-size="4.39">0</tspan><tspan dy="-1.60"> + 0.33</tspan><tspan font-style="italic">d</tspan><tspan dy="1.60" font-size="4.39">r</tspan></text>
+<text xml:space="preserve" x="322.00" y="365.20" font-size="6.1" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>→ VARC-3 stage per year</tspan></text>
+<rect x="434" y="311" width="66" height="52" fill="#fff" stroke="#E2C9A0" stroke-width="0.5"/>
+<polyline points="438.00,317.00 438.58,317.00 439.16,317.00 439.74,317.00 440.32,317.00 440.90,317.01 441.48,317.02 442.06,317.03 442.64,317.04 443.22,317.06 443.80,317.08 444.38,317.10 444.96,317.13 445.54,317.17 446.12,317.21 446.70,317.26 447.28,317.32 447.86,317.38 448.44,317.45 449.02,317.53 449.60,317.62 450.18,317.72 450.76,317.82 451.34,317.94 451.92,318.07 452.50,318.20 453.08,318.35 453.66,318.51 454.24,318.68 454.82,318.86 455.40,319.05 455.98,319.26 456.56,319.48 457.14,319.71 457.72,319.96 458.30,320.21 458.88,320.48 459.46,320.77 460.04,321.07 460.62,321.38 461.20,321.70 461.78,322.04 462.36,322.39 462.94,322.75 463.52,323.13 464.10,323.52 464.68,323.93 465.26,324.34 465.84,324.77 466.42,325.21 467.00,325.66 467.58,326.13 468.16,326.61 468.74,327.09 469.32,327.59 469.90,328.10 470.48,328.61 471.06,329.14 471.64,329.68 472.22,330.22 472.80,330.77 473.38,331.32 473.96,331.89 474.54,332.46 475.12,333.03 475.70,333.61 476.28,334.19 476.86,334.77 477.44,335.36 478.02,335.94 478.60,336.53 479.18,337.12 479.76,337.70 480.34,338.29 480.92,338.87 481.50,339.45 482.08,340.03 482.66,340.60 483.24,341.17 483.82,341.73 484.40,342.28 484.98,342.83 485.56,343.37 486.14,343.91 486.72,344.43 487.30,344.95 487.88,345.45 488.46,345.95 489.04,346.43 489.62,346.91 490.20,347.37 490.78,347.82 491.36,348.26 491.94,348.69 492.52,349.10 493.10,349.50 493.68,349.89 494.26,350.27 494.84,350.64 495.42,350.99 496.00,351.33" fill="none" stroke="#B87203" stroke-width="0.9"/>
+<circle cx="461.20" cy="321.68" r="1.5" fill="#fff" stroke="#1F2328" stroke-width="0.6"/>
+<circle cx="472.80" cy="328.68" r="1.5" fill="#fff" stroke="#1F2328" stroke-width="0.6"/>
+<circle cx="484.40" cy="341.76" r="1.5" fill="#fff" stroke="#1F2328" stroke-width="0.6"/>
+<line x1="438.0" y1="357" x2="496.0" y2="357" stroke="#5B6573" stroke-width="0.4"/>
+<text xml:space="preserve" x="438.00" y="362.50" font-size="4.6" font-weight="normal" text-anchor="middle" fill="#5B6573"><tspan>0</tspan></text>
+<text xml:space="preserve" x="461.20" y="362.50" font-size="4.6" font-weight="normal" text-anchor="middle" fill="#5B6573"><tspan>10</tspan></text>
+<text xml:space="preserve" x="484.40" y="362.50" font-size="4.6" font-weight="normal" text-anchor="middle" fill="#5B6573"><tspan>20</tspan></text>
+<text xml:space="preserve" x="467.00" y="370.00" font-size="4.8" font-weight="normal" text-anchor="middle" fill="#5B6573"><tspan>years; ○ Bourguignon 2015</tspan></text>
+<text xml:space="preserve" x="439.00" y="342.60" font-size="4.8" font-weight="normal" text-anchor="start" fill="#5B6573"><tspan>freedom</tspan></text>
+<text xml:space="preserve" x="439.00" y="348.10" font-size="4.8" font-weight="normal" text-anchor="start" fill="#5B6573"><tspan>from SVD</tspan></text>
+<rect x="316" y="383" width="192" height="58" rx="3" fill="#ECE6F5" stroke="#674A99" stroke-width="0.8"/>
+<text xml:space="preserve" x="322.00" y="394.00" font-size="7.2" font-weight="bold" text-anchor="start" fill="#674A99"><tspan>Repair procedure models</tspan></text>
+<text xml:space="preserve" x="322.00" y="405.60" font-size="6.1" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>ViV: EOA = 1.49 + 0.05(ID − 21) [+0.5 SEV, +0.3 BVF]</tspan></text>
+<text xml:space="preserve" x="322.00" y="415.20" font-size="6.1" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>TEER: ROA</tspan><tspan dy="1.60" font-size="4.39">seg</tspan><tspan dy="-1.60"> × (1 − η) per clip; MVA = 0.9(MVA − </tspan><tspan font-style="italic">n</tspan><tspan>Δ</tspan><tspan font-style="italic">A</tspan><tspan>)</tspan></text>
+<text xml:space="preserve" x="322.00" y="424.80" font-size="6.1" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>Criteria: VARC-3 (grad. &lt; 20 mmHg, </tspan><tspan font-style="italic">V</tspan><tspan dy="1.60" font-size="4.39">max</tspan><tspan dy="-1.60"> &lt; 3 m/s,</tspan></text>
+<text xml:space="preserve" x="322.00" y="434.40" font-size="6.1" font-weight="normal" text-anchor="start" fill="#1F2328"><tspan>   DVI ≥ 0.25, AR &lt; moderate); TEER MG ≤ 5 mmHg</tspan></text>
+</svg>
